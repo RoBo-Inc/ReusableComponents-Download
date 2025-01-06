@@ -1,0 +1,24 @@
+.build/
+*.generated.swift
+
+## macOS
+.DS_Store
+
+## User settings
+xcshareddata/
+xcuserdata/
+
+## Xcode workspace
+*.xcworkspace
+
+## Android Studio
+*.idea
+
+## Swift Package Manager
+Packages/
+Package.pins
+Package.resolved
+.swiftpm
+
+## Snapshot Testing
+__snapshots__/
