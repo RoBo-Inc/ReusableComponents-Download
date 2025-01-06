@@ -1,36 +1,34 @@
 import ComposableArchitecture
+import ReusableComponents
 import SwiftUI
 
 @Reducer
-struct CityMap {
+public struct CityMap {
   @ObservableState
-  struct State: Equatable, Identifiable {
-    let id: UUID
+  public struct State: Identifiable, Sendable {
+    public let id: UUID
     let download: Download
     var downloadComponent: DownloadComponent.State
     
     init(download: Download) {
-      id = download.id
+      @Dependency(\.uuid) var uuid
+      id = uuid()
       self.download = download
-      downloadComponent = DownloadComponent.State(
-        id: .init(id),
-        url: download.downloadVideoUrl
-      )
+      downloadComponent = .init(id: .init(id), url: download.downloadVideoUrl)
     }
   }
   
-  enum Action {
+  public enum Action: Sendable {
     case downloadComponent(DownloadComponent.Action)
   }
   
-  var body: some Reducer<State, Action> {
+  public var body: some Reducer<State, Action> {
     Scope(state: \.downloadComponent, action: \.downloadComponent) {
       DownloadComponent()
     }
-    
     Reduce { state, action in
       switch action {
-      case .downloadComponent(.downloadClient(.success(.response))):
+      case .downloadComponent(.download(.completeEvent)):
         // NB: This is where you could perform the effect to save the data to a file on disk.
         return .none
         
@@ -51,21 +49,18 @@ struct CityMapDetailView: View {
   var body: some View {
     Form {
       Text(store.download.blurb)
-      
       HStack {
-        switch store.downloadComponent.mode {
+        switch store.downloadComponent.status {
         case .notDownloaded:
           Text("Download for offline viewing")
-        case .downloaded:
-          Text("Downloaded")
-        case .downloading(let progress):
-          Text("Downloading \(Int(100 * progress))%")
-        case .startingToDownload:
+        case .starting:
           Text("Downloading…")
+        case .downloading(let progress):
+          Text("Downloading \(progress)%")
+        case .complete:
+          Text("Downloaded")
         }
-        
         Spacer()
-        
         DownloadComponentView(
           store: store.scope(state: \.downloadComponent, action: \.downloadComponent)
         )

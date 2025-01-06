@@ -5,7 +5,7 @@ struct AboutView: View {
   
   var body: some View {
     DisclosureGroup("About this case study") {
-      Text(template: self.readMe)
+      Text(template: readMe)
     }
   }
 }
@@ -60,10 +60,10 @@ extension Text {
 
 extension Set {
   fileprivate mutating func toggle(_ element: Element) {
-    if self.contains(element) {
-      self.remove(element)
+    if contains(element) {
+      remove(element)
     } else {
-      self.insert(element)
+      insert(element)
     }
   }
 }

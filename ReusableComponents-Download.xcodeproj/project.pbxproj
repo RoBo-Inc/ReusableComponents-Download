@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30A727A72D2B897900D685D9 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 30A727A62D2B897900D685D9 /* ComposableArchitecture */; };
 		30A727C42D2BC26400D685D9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 30A727C32D2BC26400D685D9 /* README.md */; };
+		30E157AC2D2BCE9A00F05ED5 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 30E157AB2D2BCE9A00F05ED5 /* AppFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		30A727882D2B850900D685D9 /* ReusableComponents-Download.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReusableComponents-Download.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A727C32D2BC26400D685D9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		30A728862D2BC87C00D685D9 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -42,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30A727A72D2B897900D685D9 /* ComposableArchitecture in Frameworks */,
+				30E157AC2D2BCE9A00F05ED5 /* AppFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +54,9 @@
 			isa = PBXGroup;
 			children = (
 				30A727C32D2BC26400D685D9 /* README.md */,
+				30A728862D2BC87C00D685D9 /* Modules */,
 				30A7278A2D2B850900D685D9 /* ReusableComponents-Download */,
+				30E157AA2D2BCE9A00F05ED5 /* Frameworks */,
 				30A727892D2B850900D685D9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +67,13 @@
 				30A727882D2B850900D685D9 /* ReusableComponents-Download.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		30E157AA2D2BCE9A00F05ED5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,7 +96,7 @@
 			);
 			name = "ReusableComponents-Download";
 			packageProductDependencies = (
-				30A727A62D2B897900D685D9 /* ComposableArchitecture */,
+				30E157AB2D2BCE9A00F05ED5 /* AppFeature */,
 			);
 			productName = "ReusableComponents-Download";
 			productReference = 30A727882D2B850900D685D9 /* ReusableComponents-Download.app */;
@@ -117,7 +127,6 @@
 			mainGroup = 30A7277F2D2B850900D685D9;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				30A727A52D2B897900D685D9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 30A727892D2B850900D685D9 /* Products */;
@@ -370,22 +379,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		30A727A52D2B897900D685D9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.17.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		30A727A62D2B897900D685D9 /* ComposableArchitecture */ = {
+		30E157AB2D2BCE9A00F05ED5 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 30A727A52D2B897900D685D9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
+			productName = AppFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

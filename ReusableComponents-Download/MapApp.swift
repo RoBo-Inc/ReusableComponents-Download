@@ -1,13 +1,14 @@
+import AppFeature
 import SwiftUI
 
 @main
-struct DownloadApp: App {
+struct MapApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
         CitiesView(
-          store: .init(initialState: .init(cityMaps: .mocks)) {
-            MapApp()
+          store: .init(initialState: .init(.mocks)) {
+            Cities()
               ._printChanges()
           }
         )
