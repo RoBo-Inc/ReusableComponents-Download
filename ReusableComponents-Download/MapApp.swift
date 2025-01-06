@@ -3,16 +3,16 @@ import SwiftUI
 
 @main
 struct MapApp: App {
-  var body: some Scene {
-    WindowGroup {
-      NavigationStack {
-        CitiesView(
-          store: .init(initialState: .init(.mocks)) {
-            Cities()
-              ._printChanges()
-          }
-        )
-      }
+    var body: some Scene {
+        WindowGroup {
+            NavigationStack {
+                CityMapsView(
+                    store: .init(initialState: .init(.mocks)) {
+                        CityMaps()
+                            ._printChanges()
+                    }
+                )
+            }
+        }
     }
-  }
 }
