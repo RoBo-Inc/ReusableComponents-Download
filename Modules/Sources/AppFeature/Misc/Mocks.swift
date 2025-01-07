@@ -1,7 +1,7 @@
 import ComposableArchitecture
 import Foundation
 
-public extension IdentifiedArray where ID == CityMapFeature.State.ID, Element == CityMapFeature.State {
+public extension IdentifiedArray where ID == CityMapRow.State.ID, Element == CityMapRow.State {
     static let mocks: Self = [
         .init(cityMap: .init(
             url: .init(string: "http://ipv4.download.thinkbroadband.com/50MB.zip")!,
