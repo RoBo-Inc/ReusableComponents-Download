@@ -20,3 +20,11 @@ struct CityMapRowView: View {
         }
     }
 }
+
+#Preview("Row") {
+    NavigationView {
+        CityMapRowView(
+            store: .init(initialState: IdentifiedArrayOf<CityMapRow.State>.mocks[0]) {}
+        )
+    }
+}
