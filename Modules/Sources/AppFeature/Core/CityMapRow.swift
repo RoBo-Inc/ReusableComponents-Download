@@ -8,13 +8,13 @@ public struct CityMapRow {
     public struct State: Identifiable, Sendable {
         public let id: UUID
         let cityMap: CityMap
-        var downloadComponent: DownloadComponent.State
+        @Shared var downloadComponent: DownloadComponent.State
         
         init(cityMap: CityMap) {
             @Dependency(\.uuid) var uuid
             id = uuid()
             self.cityMap = cityMap
-            downloadComponent = .init(id: .init(id), url: cityMap.url)
+            _downloadComponent = .init(value: .init(id: .init(id), url: cityMap.url))
         }
     }
     

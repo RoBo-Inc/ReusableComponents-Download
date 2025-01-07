@@ -29,10 +29,10 @@ public struct CityMaps: Sendable {
                 state.cityMapDetail = .init(cityMapRow)
                 return .none
             case let .cityMapRows(.element(id: id, action: .downloadComponent(action))):
-                return rowComponent(&state, id: id, action: action)
+                return rowComponent(state, id: id, action: action)
             case .cityMapDetail(.presented(.downloadComponent(let action))):
                 guard let id = state.cityMapDetail?.id else { return .none }
-                return rowComponent(&state, id: id, action: action)
+                return rowComponent(state, id: id, action: action)
             case .cityMapDetail(.dismiss):
                 return .none
             }
@@ -42,18 +42,13 @@ public struct CityMaps: Sendable {
         }
     }
     
-    private func rowComponent(_ state: inout State, id: UUID, action: DownloadComponent.Action) -> Effect<Action> {
-        guard var rowComponent = state.cityMapRows[id: id]?.downloadComponent else { return .none }
-        defer {
-            state.cityMapRows[id: id]?.downloadComponent = rowComponent
-            if state.cityMapDetail?.id == id {
-                state.cityMapDetail?.downloadComponent = rowComponent
-            }
-        }
-        return DownloadComponent()
-            .dependency(\.urlSession, .init(configuration: .ephemeral))
-            .reduce(into: &rowComponent, action: action)
-            .map { Action.cityMapRows(.element(id: id, action: .downloadComponent($0))) }
+    private func rowComponent(_ state: State, id: UUID, action: DownloadComponent.Action) -> Effect<Action> {
+        state.cityMapRows[id: id]?.$downloadComponent.withLock {
+            DownloadComponent()
+                .dependency(\.urlSession, .init(configuration: .ephemeral))
+                .reduce(into: &$0, action: action)
+                .map { Action.cityMapRows(.element(id: id, action: .downloadComponent($0))) }
+        } ?? .none
     }
 }
 
