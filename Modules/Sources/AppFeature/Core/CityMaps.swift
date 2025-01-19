@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import ReusableComponents
 import SwiftUI
+import SwiftUIExtras
 
 @Reducer
 public struct CityMaps: Sendable {
@@ -15,6 +16,7 @@ public struct CityMaps: Sendable {
     }
     
     public enum Action: Sendable {
+        case onViewDidLoad
         case cityMapTapped(CityMapRow.State)
         case cityMapRows(IdentifiedActionOf<CityMapRow>)
         case cityMapDetail(PresentationAction<CityMapDetail.Action>)
@@ -25,6 +27,8 @@ public struct CityMaps: Sendable {
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .onViewDidLoad:
+                return .concatenate(state.cityMapRows.ids.map { rowComponent(state, id: $0, action: .start) })
             case .cityMapTapped(let cityMapRow):
                 state.cityMapDetail = .init(cityMapRow)
                 return .none
@@ -77,6 +81,9 @@ public struct CityMapsView: View {
             item: $store.scope(state: \.cityMapDetail, action: \.cityMapDetail),
             destination: CityMapDetailView.init
         )
+        .onDidLoad {
+            store.send(.onViewDidLoad)
+        }
     }
 }
 

@@ -10,12 +10,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.17.0"),
-        .package(url: "https://gitlab.com/krr-tca/tca-utils", from: "3.0.0"),
+        .package(url: "https://gitlab.com/krr-tca/tca-utils", from: "4.0.0"),
+        .package(url: "https://gitlab.com/roman.kisliachenko/swift-utils", from: "3.0.0"),
     ],
     targets: [
         .target(name: "AppFeature", dependencies: [
             .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             .product(name: "ReusableComponents", package: "tca-utils"),
+            .product(name: "SwiftUIExtras", package: "swift-utils"),
         ]),
     ]
 )
